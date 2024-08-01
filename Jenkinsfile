@@ -10,7 +10,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Kompiliere das Programm aus der C-Datei
-                sh 'gcc -o buildExe/output src/main.c'
+                sh 'gcc -o execute/output src/main.c'
             }
         }
         stage('Test') {
@@ -29,7 +29,7 @@ pipeline {
                 sh """
                 echo "Deploying to the Docker test container..."
                 // Kopiere das kompilierte Programm in den Docker-Container
-                docker cp buildExe/output test-container:/usr/share/nginx/html
+                docker cp execute/output test-container:/usr/share/nginx/html
                 """
             }
         }
