@@ -11,7 +11,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Baut das C-Programm auf macOS mit Clang
-                sh 'clang -o main main.c'
+                sh 'clang -o main src/main.c'
             }
         }
         stage('Test') {
