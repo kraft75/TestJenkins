@@ -63,20 +63,17 @@ pipeline {
     post {
         failure {
             // Rollback auf die vorherige Version, falls der Health-Check oder ein anderer Teil der Pipeline fehlschlägt
-            stage('Rollback') {
-                steps {
-                    script {
-                        // Rollback zu einer vorherigen Version im Jenkins-Slave-Verzeichnis
-                        sh '''
-                        # Annahme: Die vorherige Version befindet sich im Backup-Verzeichnis
-                        cp /Users/jay/jenkins-slave/backup/main /Users/jay/jenkins-deploy/main
-                        cd /Users/jay/jenkins-deploy && ./main &
-                        '''
-                        echo "Rollback executed: Previous version restored."
-                    }
-                }
+            script {
+                // Rollback zu einer vorherigen Version im Jenkins-Slave-Verzeichnis
+                sh '''
+                # Annahme: Die vorherige Version befindet sich im Backup-Verzeichnis
+                cp /Users/jay/jenkins-slave/backup/main /Users/jay/jenkins-deploy/main
+                cd /Users/jay/jenkins-deploy && ./main &
+                '''
+                echo "Rollback executed: Previous version restored."
             }
         }
-    }	
+    }
+	
 }// pipeline
 
